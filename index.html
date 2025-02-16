@@ -5,20 +5,19 @@
         *::selection {
             background-color: #ff8d5c;
         }
-
         * {
             cursor: url(https://sgtflixy.github.io/middle-finger.cur) 16 16, auto !important;
         }
-    </style>
-</head>
-<body>
-    <img 
-        alt="Background Image" 
-        fetchPriority="high" 
-        decoding="async" 
-        data-nimg="fill" 
-        class="pointer-events-none fixed inset-0 z-0 h-full w-full object-cover" 
-        style="
+        body {
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, sans-serif;
+            background-color: #111827;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .background-image {
             position: absolute;
             height: 100%;
             width: 100%;
@@ -26,9 +25,64 @@
             top: 0;
             right: 0;
             bottom: 0;
-            color: transparent;
-        "
-        src="https://cdn.xoa.me/uploads/a0bfc0fc-c459-41b3-aecb-001dc56cfe12.file"
+            object-fit: cover;
+            filter: blur(100px);
+            -webkit-filter: blur(20px);
+            z-index: 0;
+        }
+        .card {
+            width: 400px;
+            background-color: rgba(255, 75, 75, 0.75);
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            transition: transform 0.2s ease-out;
+            will-change: transform;
+            position: relative;
+            z-index: 1;
+            padding: 2.5rem;
+        }
+        .card:hover {
+            transform: scale(1.1) rotateX(var(--rotateX)) rotateY(var(--rotateY));
+        }
+        a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const card = document.querySelector('.card');
+            document.addEventListener('mousemove', (event) => {
+                const { clientX: x, clientY: y } = event;
+                const { innerWidth: width, innerHeight: height } = window;
+                const rotateX = -((height / 2 - y) / height) * 90;
+                const rotateY = -((width / 2 - x) / width) * 90;
+                card.style.setProperty('--rotateX', `${rotateX}deg`);
+                card.style.setProperty('--rotateY', `${rotateY}deg`);
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+        });
+    </script>
+</head>
+<body>
+    <img 
+        alt="Background Image" 
+        fetchPriority="high" 
+        decoding="async" 
+        data-nimg="fill" 
+        class="background-image pointer-events-none" 
+        src="https://sgtflixy.github.io/background1.gif"
     />
+    
+    <div class="card">
+        <h1 class="mt-4 text-2xl font-bold">sgtflixy</h1>
+        <h5><p class="text-white-600">My discord Server :</p><a href="https://discord.gg/8qGb5D6e7q">LINK</a></h5>
+        <h5><p class="text-gray-600">Add my discord bot</p><a href="https://discord.com/oauth2/authorize?client_id=1301214136218419260&permissions=8&integration_type=0&scope=bot">LINK</a></h5>
+    </div>
 </body>
 </html>
